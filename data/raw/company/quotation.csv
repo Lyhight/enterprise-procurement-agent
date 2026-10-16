@@ -1,0 +1,6 @@
+quotation_id,request_id,supplier_id,unit_price,currency,delivery_days,warranty_months,valid_until
+Q001,PR001,S001,62000,CNY,16,36,2026-12-31
+Q002,PR001,S002,57000,CNY,24,36,2026-12-31
+Q003,PR001,S003,59800,CNY,20,36,2026-12-31
+Q004,PR002,S006,24500,CNY,18,24,2026-12-31
+

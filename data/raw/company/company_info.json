@@ -1,0 +1,10 @@
+{
+  "company_name": "东方智能制造集团有限公司",
+  "industry": "智能制造",
+  "employee_number": 5000,
+  "location": "Shanghai",
+  "departments": ["研发部", "采购部", "财务部", "生产部", "信息技术部"],
+  "purchase_system": "ERP-SAP",
+  "approval_system": "OA"
+}
+

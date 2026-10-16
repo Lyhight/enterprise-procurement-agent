@@ -1,0 +1,10 @@
+supplier_id,supplier_name,category,rating,delivery_score,risk_level,cooperation_year,qualified
+S001,华为技术有限公司,服务器,95,98,LOW,8,true
+S002,浪潮集团,服务器,92,90,LOW,6,true
+S003,戴尔科技,服务器,90,93,LOW,5,true
+S004,联想集团,服务器,88,88,MEDIUM,4,true
+S005,新华三集团,网络设备,91,95,LOW,7,true
+S006,西门子工业,工业设备,96,97,LOW,10,true
+S007,研华科技,工业计算机,90,92,LOW,6,true
+S008,某电子供应商,传感器,75,70,HIGH,2,false
+

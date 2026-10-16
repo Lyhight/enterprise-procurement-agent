@@ -1,0 +1,7 @@
+order_id,supplier_id,product,quantity,total_amount,delivery_days,status,date
+PO001,S001,GPU服务器,20,1200000,15,completed,2025-01-10
+PO002,S002,GPU服务器,50,2800000,28,completed,2025-03-12
+PO003,S003,GPU服务器,30,1800000,20,completed,2025-05-08
+PO004,S006,PLC控制设备,40,960000,18,completed,2025-07-16
+PO005,S008,温度传感器,200,160000,35,delayed,2025-09-03
+

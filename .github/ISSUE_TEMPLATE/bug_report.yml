@@ -1,0 +1,38 @@
+name: Bug report
+description: 报告可复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: 请勿提交密钥、真实采购数据或内部系统地址。
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 说明实际行为和预期行为。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 提供最小、脱敏的复现步骤。
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本或 Commit
+  - type: textarea
+    id: logs
+    attributes:
+      label: 脱敏日志
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 数据确认
+      options:
+        - label: 我已确认内容不包含凭证或真实企业数据
+          required: true

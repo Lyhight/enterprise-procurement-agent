@@ -1,0 +1,5 @@
+request_id,requester_id,department,product,category,quantity,budget,required_date,priority,status
+PR001,E002,研发部,GPU服务器,服务器,20,1250000,2026-12-20,HIGH,pending
+PR002,E004,生产部,PLC控制设备,工业设备,40,1000000,2026-12-15,MEDIUM,pending
+PR003,E005,信息技术部,核心交换机,网络设备,12,480000,2026-12-10,MEDIUM,pending
+

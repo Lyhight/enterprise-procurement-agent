@@ -1,0 +1,26 @@
+name: Feature request
+description: 提议新的采购能力或工程改进
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 业务场景
+      description: 说明采购角色、触发条件和期望结果。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 如涉及 Agent 工具、审批规则或外部集成，请说明边界。
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收标准
+      description: 列出可验证的完成条件。
+    validations:
+      required: true

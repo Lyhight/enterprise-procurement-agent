@@ -1,0 +1,23 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "files.encoding": "utf8",
+  "terminal.integrated.env.windows": {
+    "PYTHONUTF8": "1"
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.egg-info": true,
+    ".test-tmp-*": true,
+    ".tmp": true,
+    "frontend/node_modules": true,
+    "frontend/dist": true
+  },
+  "search.exclude": {
+    "**/__pycache__": true,
+    ".test-tmp-*": true,
+    "frontend/node_modules": true,
+    "frontend/dist": true
+  }
+}
+

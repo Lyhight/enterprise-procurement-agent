@@ -1,0 +1,84 @@
+{
+  "agent_cases": [
+    {
+      "name": "高金额服务器采购进入L3审批",
+      "request_id": "PR001",
+      "expected_approval_level": "L3",
+      "minimum_recommendations": 3,
+      "expected_next_action": "提交审批",
+      "required_trace_step": "finalize"
+    },
+    {
+      "name": "报价不足进入人工复核",
+      "request_id": "PR002",
+      "expected_approval_level": "L2",
+      "minimum_recommendations": 1,
+      "expected_next_action": "采购专员人工复核",
+      "required_trace_step": "human_review"
+    },
+    {
+      "name": "无效需求停止自动寻源",
+      "request_id": "PR-EVAL-INVALID",
+      "request": {
+        "request_id": "PR-EVAL-INVALID",
+        "requester_id": "E002",
+        "department": "财务部",
+        "product": "GPU服务器",
+        "category": "服务器",
+        "quantity": 1,
+        "budget": 200000,
+        "required_date": "2027-06-01",
+        "priority": "MEDIUM",
+        "status": "draft"
+      },
+      "maximum_recommendations": 0,
+      "expected_next_action": "申请人补充或修正采购需求",
+      "required_trace_steps": ["requirement_review", "finalize"],
+      "expected_plan_statuses": {
+        "screen_suppliers": "SKIPPED",
+        "collect_quotations": "SKIPPED",
+        "rank_suppliers": "SKIPPED"
+      },
+      "warning_contains": ["部门", "状态"]
+    },
+    {
+      "name": "无合格供应商转人工扩展寻源",
+      "request_id": "PR-EVAL-NO-SUPPLIER",
+      "request": {
+        "request_id": "PR-EVAL-NO-SUPPLIER",
+        "requester_id": "E002",
+        "department": "研发部",
+        "product": "量子控制设备",
+        "category": "不存在品类",
+        "quantity": 1,
+        "budget": 200000,
+        "required_date": "2027-06-01",
+        "priority": "MEDIUM",
+        "status": "submitted"
+      },
+      "maximum_recommendations": 0,
+      "expected_next_action": "采购专员扩展寻源",
+      "required_trace_steps": ["manual_review", "finalize"],
+      "expected_plan_statuses": {
+        "collect_quotations": "SKIPPED",
+        "rank_suppliers": "SKIPPED"
+      }
+    }
+  ],
+  "rag_cases": [
+    {
+      "name": "金额审批制度召回",
+      "query": "超过一百万元采购需要什么审批等级",
+      "expected_source": "procurement_policy.md",
+      "expected_section": "审批等级",
+      "top_k": 3
+    },
+    {
+      "name": "供应商风险制度召回",
+      "query": "高风险供应商是否允许自动推荐",
+      "expected_source": "procurement_policy.md",
+      "expected_section": "供应商与询价",
+      "top_k": 3
+    }
+  ]
+}

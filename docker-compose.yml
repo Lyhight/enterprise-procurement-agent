@@ -1,0 +1,73 @@
+services:
+  procurement-agent:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: production
+      LOG_LEVEL: INFO
+      DATABASE_PATH: /app/data/processed/procurement.db
+      LLM_PROVIDER: ${LLM_PROVIDER:-local}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-6-astra}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AUTH_ENABLED: "true"
+      AUTH_TOKENS: ${AUTH_TOKENS:?AUTH_TOKENS must be configured}
+      INTEGRATION_MODE: ${INTEGRATION_MODE:-mock}
+      OA_BASE_URL: ${OA_BASE_URL:-}
+      OA_API_TOKEN: ${OA_API_TOKEN:-}
+      ERP_BASE_URL: ${ERP_BASE_URL:-}
+      ERP_API_TOKEN: ${ERP_API_TOKEN:-}
+      SUPPLIER_DELIVERY_MODE: ${SUPPLIER_DELIVERY_MODE:-mock}
+      SUPPLIER_GATEWAY_URL: ${SUPPLIER_GATEWAY_URL:-}
+      SUPPLIER_GATEWAY_TOKEN: ${SUPPLIER_GATEWAY_TOKEN:-}
+      SUPPLIER_CALLBACK_SECRET: ${SUPPLIER_CALLBACK_SECRET:-}
+    volumes:
+      - procurement-data:/app/data/processed
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  integration-worker:
+    build: .
+    command: ["python", "-m", "procurement_agent.interfaces.integration_worker", "--poll-seconds", "2"]
+    environment:
+      APP_ENV: production
+      DATABASE_PATH: /app/data/processed/procurement.db
+      AUTH_ENABLED: "true"
+      AUTH_TOKENS: ${AUTH_TOKENS:?AUTH_TOKENS must be configured}
+      INTEGRATION_MODE: ${INTEGRATION_MODE:-mock}
+      OA_BASE_URL: ${OA_BASE_URL:-}
+      OA_API_TOKEN: ${OA_API_TOKEN:-}
+      ERP_BASE_URL: ${ERP_BASE_URL:-}
+      ERP_API_TOKEN: ${ERP_API_TOKEN:-}
+      INTEGRATION_TIMEOUT_SECONDS: ${INTEGRATION_TIMEOUT_SECONDS:-10}
+    volumes:
+      - procurement-data:/app/data/processed
+    depends_on:
+      procurement-agent:
+        condition: service_healthy
+    restart: unless-stopped
+
+  rfq-delivery-worker:
+    build: .
+    command: ["python", "-m", "procurement_agent.interfaces.rfq_delivery_worker", "--poll-seconds", "2"]
+    environment:
+      APP_ENV: production
+      DATABASE_PATH: /app/data/processed/procurement.db
+      AUTH_ENABLED: "true"
+      AUTH_TOKENS: ${AUTH_TOKENS:?AUTH_TOKENS must be configured}
+      SUPPLIER_DELIVERY_MODE: ${SUPPLIER_DELIVERY_MODE:-mock}
+      SUPPLIER_GATEWAY_URL: ${SUPPLIER_GATEWAY_URL:-}
+      SUPPLIER_GATEWAY_TOKEN: ${SUPPLIER_GATEWAY_TOKEN:-}
+      INTEGRATION_TIMEOUT_SECONDS: ${INTEGRATION_TIMEOUT_SECONDS:-10}
+    volumes:
+      - procurement-data:/app/data/processed
+    depends_on:
+      procurement-agent:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  procurement-data:

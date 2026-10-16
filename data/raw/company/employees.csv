@@ -1,0 +1,7 @@
+employee_id,name,department,position,approval_level
+E001,张伟,采购部,采购经理,L3
+E002,李强,研发部,研发主管,L1
+E003,王芳,财务部,财务经理,L3
+E004,陈鹏,生产部,生产经理,L2
+E005,刘洋,信息技术部,IT主管,L2
+
