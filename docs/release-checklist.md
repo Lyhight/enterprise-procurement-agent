@@ -12,6 +12,8 @@
 - [x] Python wheel 构建及包内 Prompt 资源检查通过
 - [x] TypeScript 类型检查及生产构建通过
 - [x] 后端测试 76 项通过，Agent/RAG 评估 6/6 通过
+- [x] 真实 Uvicorn 进程验证 `/health/ready`、`/docs`、`/app/` 和 Agent 能力接口
+- [x] 提供 Windows 一键发布验证脚本
 
 ## 发布仓库前
 

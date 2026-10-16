@@ -270,6 +270,14 @@ npm run build
 
 当前基线：后端测试 76 项通过，Agent/RAG 评估 6/6 通过。Docker 配置已提供，但仍应在安装 Docker 的环境中执行一次真实镜像构建后再发布容器制品。
 
+Windows 下也可以一键执行上述验证：
+
+```powershell
+.\scripts\verify_release.ps1
+# 已执行过 npm ci 时可使用：
+.\scripts\verify_release.ps1 -SkipNpmInstall
+```
+
 ## 设计原则
 
 采购金额、风险门槛和审批等级由可审计规则决定；未来接入 LLM 时，模型用于理解自然语言、检索制度和生成解释，不直接绕过业务约束。
